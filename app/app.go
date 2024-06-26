@@ -4,12 +4,14 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"reflect"
 	"strconv"
 )
 
 func main() {
 	showForm()
-	inputForm()
+	form := inputForm()
+	fmt.Println(form)
 }
 
 func showForm() {
@@ -27,31 +29,29 @@ func showForm() {
 	fmt.Println("---------------------------------------")
 }
 
-func inputForm() {
+func inputForm() Form {
 	scanner := bufio.NewScanner(os.Stdin)
-	var form1 Form
-	scanner.Scan()
-	form1.firstName = scanner.Text()
-	scanner.Scan()
-	form1.lastName = scanner.Text()
-	scanner.Scan()
-	form1.age, _ = strconv.Atoi(scanner.Text())
-	scanner.Scan()
-	form1.address = scanner.Text()
-	scanner.Scan()
-	form1.email = scanner.Text()
-	scanner.Scan()
-	form1.phoneNumber = scanner.Text()
-	scanner.Scan()
-	form1.profession = scanner.Text()
-	scanner.Scan()
-	form1.compName = scanner.Text()
-	scanner.Scan()
-	form1.salary, _ = strconv.Atoi(scanner.Text())
-	scanner.Scan()
-	form1.collegue = scanner.Text()
+	form := Form{}
 
-	fmt.Println(form1)
+	fields := reflect.TypeOf(form)
+	values := reflect.ValueOf(&form).Elem()
+
+	for i := 0; i < fields.NumField(); i++ {
+		field := fields.Field(i)
+		fmt.Printf("insert your %s : ", field.Name)
+		scanner.Scan()
+		input := scanner.Text()
+
+		valueField := values.Field(i)
+		switch valueField.Kind() {
+		case reflect.Int:
+			val, _ := strconv.Atoi(input)
+			valueField.SetInt(int64(val))
+		case reflect.String:
+			valueField.SetString(input)
+		}
+	}
+	return form
 }
 
 type Form struct {
