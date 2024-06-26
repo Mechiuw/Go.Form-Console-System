@@ -16,16 +16,16 @@ func main() {
 
 func showForm() {
 	fmt.Println("------------------FORM-----------------")
-	fmt.Println("1. insert your first name 			")
-	fmt.Println("2. insert your last name 				")
-	fmt.Println("3. insert your age 					")
-	fmt.Println("4. insert your address 				")
-	fmt.Println("5. insert your email 					")
-	fmt.Println("6. insert your phone number 			")
-	fmt.Println("7. insert your proficiency/profession ")
-	fmt.Println("8. insert your company's name 		")
-	fmt.Println("9. insert your salary 				")
-	fmt.Println("10. insert your collegue 				")
+	fmt.Println("1. Insert your First Name")
+	fmt.Println("2. Insert your Last Name")
+	fmt.Println("3. Insert your Age")
+	fmt.Println("4. Insert your Address")
+	fmt.Println("5. Insert your Email")
+	fmt.Println("6. Insert your Phone Number")
+	fmt.Println("7. Insert your Proficiency/Profession")
+	fmt.Println("8. Insert your Company's Name")
+	fmt.Println("9. Insert your Salary")
+	fmt.Println("10. Insert your Colleague")
 	fmt.Println("---------------------------------------")
 }
 
@@ -38,7 +38,7 @@ func inputForm() Form {
 
 	for i := 0; i < fields.NumField(); i++ {
 		field := fields.Field(i)
-		fmt.Printf("insert your %s : ", field.Name)
+		fmt.Printf("Insert your %s: ", field.Name)
 		scanner.Scan()
 		input := scanner.Text()
 
@@ -55,14 +55,14 @@ func inputForm() Form {
 }
 
 type Form struct {
-	firstName   string
-	lastName    string
-	age         int
-	address     string
-	email       string
-	phoneNumber string
-	profession  string
-	compName    string
-	salary      int
-	collegue    string
+	FirstName   string
+	LastName    string
+	Age         int
+	Address     string
+	Email       string
+	PhoneNumber string
+	Profession  string
+	CompName    string
+	Salary      int
+	Colleague   string
 }
